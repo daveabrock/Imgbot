@@ -7,7 +7,7 @@ namespace CompressImagesFunction
 {
     public static class CommitMessage
     {
-        public static string Create(CompressionResult[] optimizedImages)
+        public static string Create(RepoConfiguration repoConfiguration, CompressionResult[] optimizedImages)
         {
             if (optimizedImages?.Any() != true)
             {
@@ -18,7 +18,11 @@ namespace CompressImagesFunction
 
             var totalOrigKb = 0.0;
             var totalOptKb = 0.0;
-            commitMessage.AppendLine(KnownGitHubs.CommitMessageTitle);
+
+            var commitMessageTitle = string.IsNullOrEmpty(repoConfiguration.CustomCommitTitle) ?
+                KnownGitHubs.CommitMessageTitle : repoConfiguration.CustomCommitTitle;
+
+            commitMessage.AppendLine(commitMessageTitle);
             commitMessage.AppendLine();
 
             var imageLog = new StringBuilder();

@@ -8,6 +8,12 @@ namespace Test
     [TestClass]
     public class CommitMessageTests
     {
+        private readonly RepoConfiguration _defaultConfiguration = new RepoConfiguration();
+        private readonly RepoConfiguration _customCommitTitleConfigration = new RepoConfiguration
+        {
+            CustomCommitTitle = "Imgbot strikes again!"
+        };
+
         [TestMethod]
         public void GivenImages_ShouldReportEach()
         {
@@ -27,7 +33,7 @@ namespace Test
                 },
             };
 
-            var message = CommitMessage.Create(images);
+            var message = CommitMessage.Create(_defaultConfiguration, images);
 
             var expectedMessage = KnownGitHubs.CommitMessageTitle + Environment.NewLine +
                            Environment.NewLine +
@@ -54,7 +60,7 @@ namespace Test
                 },
             };
 
-            var message = CommitMessage.Create(images);
+            var message = CommitMessage.Create(_defaultConfiguration, images);
 
             var expectedMessage = KnownGitHubs.CommitMessageTitle + Environment.NewLine +
                              Environment.NewLine +
@@ -84,7 +90,7 @@ namespace Test
                 },
             };
 
-            var message = CommitMessage.Create(images);
+            var message = CommitMessage.Create(_defaultConfiguration, images);
 
             var expectedMessage = KnownGitHubs.CommitMessageTitle + Environment.NewLine +
                             Environment.NewLine +
@@ -117,7 +123,7 @@ namespace Test
                 },
             };
 
-            var message = CommitMessage.Create(images);
+            var message = CommitMessage.Create(_defaultConfiguration, images);
 
             var expectedMessage = KnownGitHubs.CommitMessageTitle + Environment.NewLine +
                         Environment.NewLine +
@@ -134,11 +140,35 @@ namespace Test
         [TestMethod]
         public void GivenNullOrEmptyCompressionResults_ShouldCreateEmptyString()
         {
-            var message = CommitMessage.Create(null);
+            var message = CommitMessage.Create(_defaultConfiguration, null);
             Assert.AreEqual(string.Empty, message);
 
-            var message2 = CommitMessage.Create(new CompressionResult[0]);
+            var message2 = CommitMessage.Create(null, new CompressionResult[0]);
             Assert.AreEqual(string.Empty, message);
+        }
+
+        [TestMethod]
+        public void GivenCustomCommitTitle_ShouldReportTitleFromConfiguration()
+        {
+            var images = new[]
+            {
+                new CompressionResult
+                {
+                    Title = "path/to/image.png",
+                    SizeBefore = 100.3,
+                    SizeAfter = 95.7
+                },
+            };
+
+            var message = CommitMessage.Create(_customCommitTitleConfigration, images);
+
+            var expectedMessage = _customCommitTitleConfigration.CustomCommitTitle + Environment.NewLine +
+                             Environment.NewLine +
+                             "path/to/image.png -- 100.30kb -> 95.70kb (4.59%)" + Environment.NewLine +
+                             Environment.NewLine +
+                             "Signed-off-by: ImgBotApp <ImgBotHelp@gmail.com>" + Environment.NewLine;
+
+            Assert.AreEqual(expectedMessage, message);
         }
     }
 }

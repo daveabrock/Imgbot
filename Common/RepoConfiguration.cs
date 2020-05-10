@@ -11,5 +11,7 @@
         public bool CompressWiki { get; set; }
 
         public int? MinKBReduced { get; set; } = 10;
+
+        public string CustomCommitTitle { get; set; }
     }
 }

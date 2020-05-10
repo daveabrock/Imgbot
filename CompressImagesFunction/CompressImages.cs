@@ -151,7 +151,7 @@ namespace CompressImagesFunction
                 Commands.Stage(repo, image.OriginalPath);
             }
 
-            var commitMessage = CommitMessage.Create(optimizedImages);
+            var commitMessage = CommitMessage.Create(repoConfiguration, optimizedImages);
             var signature = new Signature(KnownGitHubs.ImgBotLogin, KnownGitHubs.ImgBotEmail, DateTimeOffset.Now);
             repo.Commit(commitMessage, signature, signature);
 
