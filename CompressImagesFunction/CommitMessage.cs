@@ -20,7 +20,7 @@ namespace CompressImagesFunction
             var totalOptKb = 0.0;
 
             var commitMessageTitle = string.IsNullOrEmpty(repoConfiguration.CustomCommitTitle) ?
-                KnownGitHubs.CommitMessageTitle : repoConfiguration.CustomCommitTitle;
+                KnownGitHubs.DefaultCommitMessageTitle : repoConfiguration.CustomCommitTitle;
 
             commitMessage.AppendLine(commitMessageTitle);
             commitMessage.AppendLine();

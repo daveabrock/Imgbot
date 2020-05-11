@@ -4,6 +4,9 @@ using System.Text.RegularExpressions;
 
 namespace OpenPrFunction
 {
+    /// <summary>
+    /// A class that parses statistics of a particular image compression result.
+    /// </summary>
     public static partial class Stats
     {
         /*

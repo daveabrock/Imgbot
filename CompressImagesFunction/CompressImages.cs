@@ -25,7 +25,7 @@ namespace CompressImagesFunction
             new MozJpegCompress(),
         };
 
-        public static bool Run(CompressimagesParameters parameters, ICollector<CompressImagesMessage> compressImagesMessages, ILogger logger)
+        public static bool Run(CompressImagesParameters parameters, ICollector<CompressImagesMessage> compressImagesMessages, ILogger logger)
         {
             CredentialsHandler credentialsProvider =
                 (url, user, cred) =>

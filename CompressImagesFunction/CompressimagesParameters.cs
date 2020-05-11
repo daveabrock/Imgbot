@@ -3,7 +3,7 @@ using Common.Messages;
 
 namespace CompressImagesFunction
 {
-    public class CompressimagesParameters
+    public class CompressImagesParameters
     {
         public string RepoOwner { get; set; }
 

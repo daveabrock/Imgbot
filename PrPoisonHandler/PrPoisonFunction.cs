@@ -20,7 +20,7 @@ namespace PrPoisonHandler
     /// It is read only as it relates to GitHub - only querying for status
     /// The action it takes is moving queue messages around
     /// If there is work to do it moves the message back into the main openPR queue
-    /// If there is no work to do it deletes the message entirely
+    /// If there is no work to do it deletes the message entirely.
     /// </summary>
     public static class PrPoisonFunction
     {

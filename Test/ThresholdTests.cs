@@ -7,7 +7,7 @@ namespace Test
     [TestClass]
     public class ThresholdTests
     {
-        /// We have a default threshold set so it won't meet it by default
+        // We have a default threshold set so it won't meet it by default
         [TestMethod]
         public void GivenDefaultConfiguration_ShouldNotOptimizeImages()
         {

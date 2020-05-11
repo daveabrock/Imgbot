@@ -9,7 +9,7 @@ namespace Test
     public class CommitMessageTests
     {
         private readonly RepoConfiguration _defaultConfiguration = new RepoConfiguration();
-        private readonly RepoConfiguration _customCommitTitleConfigration = new RepoConfiguration
+        private readonly RepoConfiguration _customCommitTitleConfiguration = new RepoConfiguration
         {
             CustomCommitTitle = "Imgbot strikes again!"
         };
@@ -35,7 +35,7 @@ namespace Test
 
             var message = CommitMessage.Create(_defaultConfiguration, images);
 
-            var expectedMessage = KnownGitHubs.CommitMessageTitle + Environment.NewLine +
+            var expectedMessage = KnownGitHubs.DefaultCommitMessageTitle + Environment.NewLine +
                            Environment.NewLine +
                            "*Total -- 600.69kb -> 455.92kb (24.1%)" + Environment.NewLine +
                            Environment.NewLine +
@@ -62,7 +62,7 @@ namespace Test
 
             var message = CommitMessage.Create(_defaultConfiguration, images);
 
-            var expectedMessage = KnownGitHubs.CommitMessageTitle + Environment.NewLine +
+            var expectedMessage = KnownGitHubs.DefaultCommitMessageTitle + Environment.NewLine +
                              Environment.NewLine +
                              "path/to/image.png -- 100.30kb -> 95.70kb (4.59%)" + Environment.NewLine +
                              Environment.NewLine +
@@ -92,7 +92,7 @@ namespace Test
 
             var message = CommitMessage.Create(_defaultConfiguration, images);
 
-            var expectedMessage = KnownGitHubs.CommitMessageTitle + Environment.NewLine +
+            var expectedMessage = KnownGitHubs.DefaultCommitMessageTitle + Environment.NewLine +
                             Environment.NewLine +
                             "*Total -- 501.89kb -> 455.68kb (9.21%)" + Environment.NewLine +
                             Environment.NewLine +
@@ -125,7 +125,7 @@ namespace Test
 
             var message = CommitMessage.Create(_defaultConfiguration, images);
 
-            var expectedMessage = KnownGitHubs.CommitMessageTitle + Environment.NewLine +
+            var expectedMessage = KnownGitHubs.DefaultCommitMessageTitle + Environment.NewLine +
                         Environment.NewLine +
                         "*Total -- 501.89kb -> 455.68kb (9.21%)" + Environment.NewLine
                         + Environment.NewLine +
@@ -160,9 +160,9 @@ namespace Test
                 },
             };
 
-            var message = CommitMessage.Create(_customCommitTitleConfigration, images);
+            var message = CommitMessage.Create(_customCommitTitleConfiguration, images);
 
-            var expectedMessage = _customCommitTitleConfigration.CustomCommitTitle + Environment.NewLine +
+            var expectedMessage = _customCommitTitleConfiguration.CustomCommitTitle + Environment.NewLine +
                              Environment.NewLine +
                              "path/to/image.png -- 100.30kb -> 95.70kb (4.59%)" + Environment.NewLine +
                              Environment.NewLine +

@@ -8,7 +8,7 @@ namespace OpenPrFunction
 {
     public class PullRequest : IPullRequest
     {
-        public async Task<Pr> OpenAsync(GitHubClientParameters parameters, Settings settings = null)
+        public async Task<Pr> OpenAsync(GitHubClientParameters parameters, RepoConfiguration repoConfiguration, Settings settings = null)
         {
             var inMemoryCredentialStore = new InMemoryCredentialStore(new Credentials(KnownGitHubs.Username, parameters.Password));
             var githubClient = new GitHubClient(new ProductHeaderValue("ImgBot"), inMemoryCredentialStore);
@@ -29,7 +29,9 @@ namespace OpenPrFunction
             }
 
             var stats = Stats.ParseStats(commit.Commit.Message);
-            var pr = new NewPullRequest(KnownGitHubs.CommitMessageTitle, KnownGitHubs.BranchName, baseBranch)
+            var commitMessageTitle = string.IsNullOrEmpty(repoConfiguration.CustomCommitTitle) ?
+                KnownGitHubs.DefaultCommitMessageTitle : repoConfiguration.CustomCommitTitle;
+            var pr = new NewPullRequest(commitMessageTitle, KnownGitHubs.BranchName, baseBranch)
             {
                 Body = PullRequestBody.Generate(stats),
             };

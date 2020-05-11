@@ -109,7 +109,7 @@ namespace CompressImagesFunction
                 return;
             }
 
-            var compressImagesParameters = new CompressimagesParameters
+            var compressImagesParameters = new CompressImagesParameters
             {
                 CloneUrl = compressImagesMessage.CloneUrl,
                 LocalPath = LocalPath.CloneDir(KnownEnvironmentVariables.TMP ?? "/private/tmp/", compressImagesMessage.RepoName),
